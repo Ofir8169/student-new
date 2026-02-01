@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0ea5e9">
+  <meta property="og:title" content="הסדר סטודנט חדש">
+  <meta property="og:description" content="מסמך קצר, ברור וישיר להצגה לוועדה: ההסדר הקודם, הבעיות, והצעה להסדר חדש עם שני פתרונות ישימים.">
+  <title>הסדר סטודנט חדש</title>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#0f1a2d;
+      --text:#e9f0ff;
+      --muted:rgba(233,240,255,.72);
+      --line:rgba(233,240,255,.12);
+      --accent:#38bdf8;
+      --accent2:#22c55e;
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --radius:22px;
+      --max: 980px;
+      --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, "Noto Sans Hebrew", "Rubik", sans-serif;
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:#f6f8fc; --card:#ffffff; --text:#0b1220; --muted:rgba(11,18,32,.70);
+        --line:rgba(11,18,32,.10); --shadow: 0 20px 60px rgba(2,6,23,.12);
+      }
+    }
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--font);
+      background:
+        radial-gradient(1000px 520px at 85% 0%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 70%),
+        radial-gradient(900px 520px at 10% 95%, color-mix(in srgb, var(--accent2) 14%, transparent), transparent 70%),
+        linear-gradient(180deg, var(--bg), var(--bg));
+      color:var(--text);
+      line-height:1.55;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding: 18px 16px 120px;}
+    .topbar{
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background: color-mix(in srgb, var(--bg) 70%, transparent);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar-inner{
+      max-width:var(--max); margin:0 auto; padding: 12px 16px;
+      display:flex; align-items:center; justify-content:space-between; gap: 12px;
+    }
+    .brand{display:flex; align-items:center; gap:10px}
+    .logo{
+      width:38px; height:38px; border-radius: 16px;
+      background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 30%, transparent), color-mix(in srgb, var(--accent2) 26%, transparent));
+      border:1px solid var(--line);
+      box-shadow: 0 12px 30px rgba(0,0,0,.18);
+    }
+    .title{font-weight:1000; letter-spacing:.2px}
+    .subtitle{color:var(--muted); font-size: 13.8px}
+    .actions{display:flex; gap:8px; flex-wrap:wrap}
+    a.btn{display:inline-flex; align-items:center; justify-content:center; text-decoration:none;}
+    .btn{
+      appearance:none; border:1px solid var(--line);
+      background: color-mix(in srgb, var(--card) 88%, transparent);
+      color:inherit;
+      padding: 9px 12px; border-radius: 14px;
+      font-weight: 900; font-size: 13px;
+      cursor:pointer;
+      transition: transform .14s ease, box-shadow .18s ease, border-color .18s ease;
+      box-shadow: 0 12px 30px rgba(0,0,0,.16);
+    }
+    .btn:hover{transform: translateY(-1px); box-shadow: var(--shadow); border-color: color-mix(in srgb, var(--accent2) 22%, var(--line));}
+    .btn:disabled{opacity:.5; cursor:not-allowed; transform:none}
+    :focus-visible{outline:3px solid color-mix(in srgb, var(--accent2) 55%, transparent); outline-offset:3px; border-radius:14px;}
+
+    .progress{
+      height: 3px; background: transparent;
+    }
+    .bar{
+      height:3px; width:0%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 999px;
+    }
+
+    .hero{
+      margin-top: 16px;
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in srgb, var(--card) 92%, transparent);
+      box-shadow: var(--shadow);
+      padding: 16px 16px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(740px 280px at 92% 0%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 70%),
+        radial-gradient(640px 280px at 12% 90%, color-mix(in srgb, var(--accent2) 14%, transparent), transparent 70%);
+      opacity:.9; pointer-events:none;
+    }
+    .hero > *{position:relative}
+    h1{margin:0; font-size: 30px; font-weight:1000; line-height:1.1}
+    .lead{margin-top:10px; color:var(--muted); font-size: 15px}
+    .chips{margin-top:12px; display:flex; gap:8px; flex-wrap:wrap}
+    .chip{
+      border:1px solid var(--line);
+      background: color-mix(in srgb, var(--bg) 55%, var(--card));
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-weight: 900; font-size: 12.8px;
+      color: color-mix(in srgb, var(--text) 92%, var(--muted));
+    }
+
+    .section{
+      margin-top: 14px;
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in srgb, var(--card) 92%, transparent);
+      box-shadow: 0 18px 50px rgba(0,0,0,.25);
+      padding: 14px 14px;
+    }
+    .sec-head{display:flex; gap:12px; align-items:flex-start}
+    .badge{
+      width: 42px; height: 42px; border-radius: 18px;
+      border:1px solid var(--line);
+      background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 16%, transparent), color-mix(in srgb, var(--accent2) 14%, transparent));
+      display:flex; align-items:center; justify-content:center;
+      flex: 0 0 auto;
+      box-shadow: 0 12px 30px rgba(0,0,0,.18);
+      font-size: 18px;
+    }
+    .sec-title{font-weight:1000; font-size: 18px; margin:0}
+    .sec-sub{color:var(--muted); margin-top:4px; font-size: 14px}
+
+    .takeaway{
+      margin-top: 12px;
+      border: 1px solid color-mix(in srgb, var(--accent2) 22%, var(--line));
+      background: linear-gradient(180deg, color-mix(in srgb, var(--accent2) 10%, transparent), transparent);
+      border-radius: 18px;
+      padding: 10px 10px;
+      display:flex; gap:10px; align-items:flex-start;
+    }
+    .takeaway .ic{
+      width: 34px; height: 34px; border-radius: 14px;
+      display:flex; align-items:center; justify-content:center;
+      background: color-mix(in srgb, var(--accent2) 14%, transparent);
+      flex:0 0 auto;
+    }
+    .takeaway .tx{font-size: 14px}
+    .grid{
+      margin-top: 12px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    @media (max-width: 860px){ .grid{grid-template-columns: 1fr;} .actions{display:none} }
+    .card2{
+      border:1px solid var(--line);
+      border-radius: 18px;
+      padding: 12px 12px;
+      background: color-mix(in srgb, var(--bg) 55%, var(--card));
+    }
+    .card2 .h{font-weight:1000}
+    .card2 .p{margin-top:6px; color:var(--muted); font-size: 13.8px}
+    ul{margin:10px 0 0; padding-inline-start: 18px; color: var(--muted)}
+    li{margin:6px 0}
+    .divider{height:1px; background: var(--line); margin: 12px 0;}
+
+    }
+
+    .topbtn{
+      position: fixed;
+      right: 16px;
+      bottom: 86px;
+      z-index: 60;
+      display:none;
+    }
+
+    @media (prefers-reduced-motion: no-preference){
+      .section, .hero{transition: transform .14s ease, box-shadow .18s ease, border-color .18s ease}
+      .section:hover{transform: translateY(-1px); border-color: color-mix(in srgb, var(--accent) 18%, var(--line));}
+    }
+
+    
+    /* Premium + official tweaks */
+
+    .toast{
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 92px;
+      z-index: 80;
+      background: color-mix(in srgb, var(--card) 92%, transparent);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 10px 12px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.28);
+      font-weight: 900;
+      font-size: 13px;
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .18s ease, transform .18s ease;
+    }
+    .toast.show{opacity:1; transform: translateX(-50%) translateY(-2px);}
+
+    .btn.primary{
+      border-color: color-mix(in srgb, var(--accent) 28%, var(--line));
+      background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 22%, transparent), color-mix(in srgb, var(--accent2) 14%, transparent));
+    }
+    .btn.primary:hover{
+      border-color: color-mix(in srgb, var(--accent2) 30%, var(--line));
+    }
+
+    .nav-bar{
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 14px;
+      z-index: 60;
+      width: min(var(--max), calc(100% - 24px));
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 10px;
+      border:1px solid var(--line);
+      border-radius: 18px;
+      background: color-mix(in srgb, var(--bg) 72%, transparent);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 18px 60px rgba(0,0,0,.28);
+    }
+    .nav-meta{
+      font-weight: 950;
+      font-size: 13px;
+      color: color-mix(in srgb, var(--text) 88%, var(--muted));
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 48%;
+    }
+    .nav-actions{display:flex; gap:10px; align-items:center}
+    @media (max-width: 860px){
+      .nav-bar{bottom: 10px; padding: 10px 10px}
+      .nav-meta{max-width: 42%;}
+      .actions{display:none}
+    }
+    /* Hide nav bar at the very top (optional) */
+        @media (prefers-reduced-motion: no-preference){
+      .nav-bar{transition: opacity .18s ease, transform .18s ease, border-color .18s ease;}
+    }
+
+
+
+    
+    .btn.disabled{
+      opacity: .5;
+      pointer-events: none;
+      transform: none !important;
+      box-shadow: 0 12px 30px rgba(0,0,0,.10);
+    }
+
+
+    /* Presentation mode (clean) */
+    body.present .topbar{display:none;}
+    body.present .nav-bar{display:none;}
+    body.present .topbtn{bottom: 14px;}
+    body.present .wrap{padding-top: 8px;}
+
+
+@media print{
+      .topbar, .nav-fab, .topbtn{display:none !important;}
+      body{background:#fff; color:#000}
+      .hero, .section{box-shadow:none}
+      .wrap{padding:0}
+      a{color:#000; text-decoration:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <div class="title">הסדר סטודנט חדש</div>
+          <div class="subtitle">מסמך להצגה לוועדה — קצר, ברור וישיר</div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn" id="printBtn" type="button">🖨️ PDF</button>
+        <button class="btn" id="copyBtn" type="button">🔗 העתק קישור</button>
+        <button class="btn" id="waBtn" type="button">🟢 וואטסאפ</button>
+        <button class="btn" id="presentBtn" type="button">🧼 מצב הצגה</button>
+        <button class="btn" id="darkBtn" type="button">🌙 מצב כהה</button>
+      </div>
+    </div>
+    <div class="progress"><div class="bar" id="bar"></div></div>
+  </div>
+
+  <div class="wrap">
+    <section class="hero" id="cover">
+      <h1>הסדר סטודנט חדש</h1>
+      <div class="lead">
+        הסדר הסטודנטים הקיים נבנה לפי מודל לימודים “קלאסי” של שעות בכיתה, אבל העולם השתנה.<br>
+        היום יש מסלולים גמישים כמו האוניברסיטה הפתוחה, היברידי ושילוב עבודה–לימודים — ועדיין מדובר בלימודים אמיתיים ומחייבים.<br>
+        בפועל, ההסדר מתגמל “מערכת שעות” ולא התקדמות לימודית.<br>
+        המטרה היא לעדכן את ההסדר כך שיהיה הוגן, ברור, וייתן לכל צעיר את הזכות לבחור מסלול שמתאים לו.
+      </div>
+      <div class="chips" aria-label="נקודות מפתח">
+        <span class="chip">מדידה לפי לימודים</span>
+        <span class="chip">מינימום 3 קורסים</span>
+        <span class="chip">הוכחת לימודים (ללא ציונים)</span>
+        <span class="chip">2 פתרונות ישימים</span>
+      </div>
+    </section>
+
+    <section class="section" id="old">
+      <div class="sec-head">
+        <div class="badge">🕒</div>
+        <div>
+          <div class="sec-title">1) ההסדר הקודם</div>
+          <div class="sec-sub">איך הוא עובד בפועל — ומה הוא “מתגמל”<br><span class="chip">סטטוס: קיים כיום</span></div>
+        </div>
+      </div>
+
+      <div class="takeaway">
+        <div class="ic">🎯</div>
+        <div class="tx"><b>בשורה התחתונה:</b> ההסדר הקודם נשען בפועל על “מערכת שעות”, כולל דרישת מינימום של <b>18 שעות</b> — וזה לא משקף עומס לימודים במסלולים גמישים.</div>
+      </div>
+
+      <div class="grid">
+        <div class="card2">
+          <div class="h">מה נבדק בפועל</div>
+          <div class="p">מינימום שעות פרונטליות (“מערכת שעות”) — במקום התקדמות לימודית.</div>
+          <ul>
+            <li>סף שעות כיתה/תרגול (18 שעות מינימום).</li>
+            <li>הטבה מותנית בנראות שעות, לא בעומס אמיתי.</li>
+          </ul>
+        </div>
+        <div class="card2">
+          <div class="h">מה הבעיה במדד הזה</div>
+          <div class="p">בעולם לימודים מודרני, שעות בכיתה הן רק חלק קטן מהעבודה.</div>
+          <ul>
+            <li>פתוחה/היברידי: פחות שעות פרונטליות.</li>
+            <li>יותר למידה עצמאית, מטלות, מבחנים.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="gaps">
+      <div class="sec-head">
+        <div class="badge">⚠️</div>
+        <div>
+          <div class="sec-title">2) הבעיות בהסדר הנוכחי</div>
+          <div class="sec-sub">למה זה יוצר פערים למרות לימודים אמיתיים<br><span class="chip">בעיה: מדידה לפי שעות</span></div>
+        </div>
+      </div>
+
+      <div class="takeaway">
+        <div class="ic">🎯</div>
+        <div class="tx"><b>בשורה התחתונה:</b> המדידה לפי שעות יוצרת קיפוח למי שלומד במסלול גמיש — למרות שהוא עומד בעומס, מתקדם ומפתח את עצמו.</div>
+      </div>
+
+      <div class="grid">
+        <div class="card2">
+          <div class="h">למה פתוחה “נופלת בין הכיסאות”</div>
+          <div class="p">
+            באוניברסיטה הפתוחה אין תמיד מערכת שעות מלאה של כיתה/תרגול — אבל יש עומס אמיתי לאורך השבוע:
+            קריאה, מטלות, עבודות, מבחנים ולמידה עצמאית. לכן מדד של שעות פרונטליות מפספס את המציאות.
+          </div>
+        </div>
+        <div class="card2">
+          <div class="h">למה זה לא רק עניין של “נוחות”</div>
+          <div class="p">
+            צעירים שונים לומדים אחרת: יש מי שמשלב עבודה ולימודים, ויש מי שמקדיש את כולו ללימודים.
+            ההסדר צריך להתאים לדור צעיר מגוון — בלי להעניש מסלול אחד ולעודד אחר רק בגלל נראות.
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      <div class="card2">
+        <div class="h">מה אנחנו רוצים שההסדר ישקף</div>
+        <ul>
+          <li><b>למידה = פיתוח עצמי</b> — וזה בדיוק מה שהקיבוץ תומך בו.</li>
+          <li>הוגנות בין מסלולים שונים (פתוחה, אוניברסיטה, היברידי, עבודה+לימודים).</li>
+          <li>מדד פשוט ובר-בדיקה שלא דורש מעקב אחרי “שעות”.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="proposal">
+      <div class="sec-head">
+        <div class="badge">✅</div>
+        <div>
+          <div class="sec-title">3) ההצעה להסדר חדש</div>
+          <div class="sec-sub">מדד חדש + שני פתרונות לבחירת הוועדה<br><span class="chip">הצעה: 3 קורסים + הוכחה</span></div>
+        </div>
+      </div>
+
+      <div class="takeaway">
+        <div class="ic">🎯</div>
+        <div class="tx"><b>בשורה התחתונה:</b> בודקים <b>לימודים מוכחים</b>, לא ציונים ולא שעות: <b>מינימום 3 קורסים בסמסטר</b> + <b>תעודת סטודנט/אישור רישום</b>.</div>
+      </div>
+
+      <div class="grid">
+        <div class="card2">
+          <div class="h">המדד החדש</div>
+          <ul>
+            <li><b>מינימום:</b> 3 קורסים בסמסטר (סף שמייצג לימודים אמיתיים).</li>
+            <li><b>בקרה:</b> תעודת סטודנט + אישור רישום/מערכת הרשמה.</li>
+            <li><b>לא בודקים:</b> ציונים.</li>
+          </ul>
+        </div>
+        <div class="card2">
+          <div class="h">מה קורה אם זה לא “קורסים”</div>
+          <div class="p">
+            אם מישהו לומד קורס/הכשרה משמעותית שאינה לפי סמסטר (למשל קורס של חצי שנה),
+            ניתן להכיר בכך לפי <b>היקף וזמן</b> + הוכחה רשמית — תחת אותו עיקרון: עומס אמיתי ומוכח.
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="grid">
+        <div class="card2">
+          <div class="h">פתרון א׳ — זכאות אוטומטית (פשוט ויעיל)</div>
+          <div class="p">
+            כל צעיר זכאי להסדר כל עוד הוא עומד בתנאי בסיס:
+            <b>3 קורסים בסמסטר + הוכחת לימודים</b>. אין תלות במערכת שעות.
+          </div>
+          <ul>
+            <li>קל לבדיקה, שקוף, ללא פרשנויות.</li>
+            <li>מכסה פתוחה/היברידי/עבודה+לימודים באותו סטנדרט.</li>
+          </ul>
+        </div>
+
+        <div class="card2">
+          <div class="h">פתרון ב׳ — מסלול לפי שנים (זכות שווה לכולם)</div>
+          <div class="p">
+            ההסדר מגיע לכל צעיר למשך <b>4–5 שנים</b> (חלון זמן הגיוני לתואר/הכשרה),
+            כאשר בכל סמסטר מציגים הוכחת לימודים משמעותיים (כמו תנאי המינימום).
+          </div>
+          <ul>
+            <li>מייצר יציבות ותכנון לצעירים.</li>
+            <li>עדיין שומר רף מינימום אמיתי.</li>
+          </ul>
+        </div>
+      </div>
+    
+      <div class="divider"></div>
+      <div class="card2">
+        <div class="h">מחויבות ותורנויות — נשארים אותו דבר</div>
+        <div class="p">
+          ההסדר החדש לא בא להקל במחויבות לקיבוץ, אלא ליצור <b>מדידה הוגנת של לימודים</b>.
+          לכן גם במסלול החדש ממשיכים לבצע <b>תורנויות</b> ותרומה לקהילה בדיוק כמו כולם.
+        </div>
+      </div>
+
+    </section>
+
+    <section class="section" id="summary">
+      <div class="sec-head">
+        <div class="badge">🎯</div>
+        <div>
+          <div class="sec-title">4) סיכום לדיון</div>
+          <div class="sec-sub">מה הוועדה מקבלת בפועל ומה נסגר<br><span class="chip">תוצאה: הוגנות ושקיפות</span></div>
+        </div>
+      </div>
+
+      <div class="takeaway">
+        <div class="ic">🎯</div>
+        <div class="tx"><b>בשורה התחתונה:</b> פתרון הוגן, ברור, נגיש ובדיד-יישום שמקדם צעירים לפי פיתוח עצמי — לא לפי מסגרת קשיחה של שעות.</div>
+      </div>
+
+      <div class="grid">
+        <div class="card2">
+          <div class="h">מה אנחנו נותנים</div>
+          <ul>
+            <li>מדד חד וברור: 3 קורסים + הוכחה.</li>
+            <li>שתי חלופות ליישום — הוועדה בוחרת.</li>
+            <li>שקיפות, פשטות, הוגנות בין מסלולים.</li>
+          </ul>
+        </div>
+        <div class="card2">
+          <div class="h">מה הפער שנפתר</div>
+          <ul>
+            <li>פתוחה/היברידי לא נפגעים בגלל “נראות”.</li>
+            <li>הסדר שמתאים לדור צעיר מגוון.</li>
+            <li>בקרה קלה בלי חיכוכים ובלי בדיקת ציונים.</li>
+          </ul>
+        </div>
+      </div>
+    
+      </section>
+  </div>
+
+  <div class="nav-bar" id="navBar" aria-label="ניווט פרקים">
+    <div class="nav-meta" id="navMeta">ניווט פרקים</div>
+    <div class="nav-actions">
+      <a class="btn" id="prevLink" href="#cover" aria-label="פרק קודם">⬅️ הקודם</a>
+      <a class="btn primary" id="nextLink" href="#old" aria-label="פרק הבא">הבא ➡️</a>
+    </div>
+  </div>
+  <button class="btn topbtn" id="toTop" type="button" aria-label="חזרה למעלה">⬆️ למעלה</button>
+
+  <script>
+    // Print
+    document.getElementById('printBtn')?.addEventListener('click', ()=>window.print());
+
+    // Dark toggle (manual)
+    const darkBtn = document.getElementById('darkBtn');
+    let manualDark = false;
+    const applyMode = ()=>{
+      if(!manualDark) return;
+      document.documentElement.style.setProperty('--bg','#0b1220');
+      document.documentElement.style.setProperty('--card','#0f1a2d');
+      document.documentElement.style.setProperty('--text','#e9f0ff');
+      document.documentElement.style.setProperty('--muted','rgba(233,240,255,.72)');
+      document.documentElement.style.setProperty('--line','rgba(233,240,255,.12)');
+    };
+    darkBtn?.addEventListener('click', ()=>{
+      manualDark = !manualDark;
+      darkBtn.textContent = manualDark ? '☀️ מצב בהיר' : '🌙 מצב כהה';
+      if(manualDark) applyMode(); else location.reload();
+    });
+
+    // Progress bar
+    const bar = document.getElementById('bar');
+    const updBar = ()=>{
+      const h = document.documentElement;
+      const scrollTop = h.scrollTop || document.body.scrollTop;
+      const scrollHeight = h.scrollHeight - h.clientHeight;
+      const p = scrollHeight ? (scrollTop / scrollHeight) * 100 : 0;
+      bar.style.width = Math.max(0, Math.min(100, p)) + '%';
+    };
+    window.addEventListener('scroll', ()=>requestAnimationFrame(updBar), {passive:true});
+    updBar();
+
+    
+    
+    // Chapter navigation (hash-first: works even if smooth scroll is blocked)
+    const order = ['cover','old','gaps','proposal','summary'];
+    const titles = {cover:'פתיחה', old:'ההסדר הקודם', gaps:'הבעיות', proposal:'ההצעה', summary:'סיכום לדיון'};
+    const prevLink = document.getElementById('prevLink');
+    const nextLink = document.getElementById('nextLink');
+    const navMeta = document.getElementById('navMeta');
+
+    const current = ()=>{
+      // Use viewport position; fall back to hash
+      const tops = order.map(id=>{
+        const el=document.getElementById(id); 
+        const r=el?.getBoundingClientRect?.() || {top: 999999};
+        return {id, top:r.top};
+      });
+      const near = (tops.filter(x=>x.top<=140).sort((a,b)=>b.top-a.top)[0] || tops.sort((a,b)=>a.top-b.top)[0]);
+      return (location.hash && order.includes(location.hash.slice(1))) ? location.hash.slice(1) : (near?.id || 'cover');
+    };
+
+    const updateNav = ()=>{
+      const cur = current();
+      const i = order.indexOf(cur);
+      const prevId = order[Math.max(0, i-1)];
+      const nextId = order[Math.min(order.length-1, i+1)];
+
+      if(prevLink) prevLink.href = '#' + prevId;
+      if(nextLink) nextLink.href = '#' + nextId;
+
+      if(prevLink) prevLink.setAttribute('aria-disabled', String(i<=0));
+      if(nextLink) nextLink.setAttribute('aria-disabled', String(i>=order.length-1));
+
+      // Visual disabled state via CSS class
+      prevLink?.classList.toggle('disabled', i<=0);
+      nextLink?.classList.toggle('disabled', i>=order.length-1);
+
+      if(navMeta){
+        const chapter = Math.max(1, Math.min(4, i+1)); // cover=1, summary=5 but show 4 at most
+        navMeta.textContent = `פרק ${Math.min(chapter,4)} מתוך 4 • ${titles[cur] || ''}`;
+      }
+    };
+
+    window.addEventListener('scroll', ()=>requestAnimationFrame(updateNav), {passive:true});
+    window.addEventListener('hashchange', updateNav);
+    updateNav();
+
+
+
+    // Back to top (to cover)
+    const toTop = document.getElementById('toTop');
+    const toggleTop = ()=>{
+      toTop.style.display = window.scrollY > 650 ? 'inline-flex' : 'none';
+    };
+    window.addEventListener('scroll', ()=>requestAnimationFrame(toggleTop), {passive:true});
+    toggleTop();
+    toTop.addEventListener('click', ()=>goTo('cover'));
+
+    // Keyboard (desktop)
+    document.addEventListener('keydown', (e)=>{
+      const tag = (document.activeElement?.tagName || '').toLowerCase();
+      if(tag === 'input' || tag === 'textarea') return;
+      if(e.key === 'ArrowLeft'){ prevBtn.click(); }
+      if(e.key === 'ArrowRight'){ nextBtn.click(); }
+      if(e.key.toLowerCase() === 'h'){ goTo('cover'); }
+      if(e.key.toLowerCase() === 'e'){ goTo('summary'); }
+    });
+  
+    // Toast helper
+    const toastEl = document.getElementById('toast');
+    let toastT = null;
+    const toast = (msg)=>{
+      if(!toastEl) return;
+      toastEl.textContent = msg;
+      toastEl.classList.add('show');
+      clearTimeout(toastT);
+      toastT = setTimeout(()=>toastEl.classList.remove('show'), 1600);
+    };
+
+    // Copy link
+    document.getElementById('copyBtn')?.addEventListener('click', async ()=>{
+      const url = location.href;
+      try{
+        await navigator.clipboard.writeText(url);
+        toast('הקישור הועתק ✅');
+      }catch(e){
+        // Fallback
+        const ta = document.createElement('textarea');
+        ta.value = url; document.body.appendChild(ta);
+        ta.select(); document.execCommand('copy');
+        ta.remove();
+        toast('הקישור הועתק ✅');
+      }
+    });
+
+    // WhatsApp share
+    document.getElementById('waBtn')?.addEventListener('click', ()=>{
+      const url = location.href;
+      const text = `מצרף/ת מסמך לדיון בוועדה: "הסדר סטודנט חדש".\n\n${url}`;
+      window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+    });
+
+    // Presentation mode
+    const presentBtn = document.getElementById('presentBtn');
+    presentBtn?.addEventListener('click', ()=>{
+      document.body.classList.toggle('present');
+      const on = document.body.classList.contains('present');
+      presentBtn.textContent = on ? '↩️ חזרה' : '🧼 מצב הצגה';
+      toast(on ? 'מצב הצגה הופעל' : 'חזרה למצב רגיל');
+    });
+
+  </script>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
