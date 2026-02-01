@@ -1,358 +1,97 @@
 <!doctype html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>הסדר סטודנט חדש — מסמך לוועדה</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0ea5e9">
+  <meta property="og:title" content="הסדר סטודנט חדש">
+  <meta property="og:description" content="מסמך קצר, ברור וישיר להצגה לוועדה: ההסדר הקודם, הבעיות, והצעה להסדר חדש עם שני פתרונות ישימים.">
+  <title>הסדר סטודנט חדש</title>
   <style>
     :root{
-      /* Inviting palette (light) */
-      --bg:#f6f8ff;
-      --bg2:#ffffff;
-      --card:#ffffff;
-      --text:#0f172a;
-      --muted:#475569;
-      --line:#e6e9f5;
-
-      --accent:#4f46e5;   /* indigo */
-      --accent2:#06b6d4;  /* cyan */
-      --good:#10b981;
-      --warn:#f59e0b;
-
-      --shadow: 0 10px 28px rgba(15, 23, 42, .08);
-      --radius: 18px;
-      --max: 1180px;
-    }
-
-    html[data-theme="dark"]{
       --bg:#0b1220;
-      --bg2:#070b14;
-      --card: rgba(255,255,255,.06);
-      --text:#eef3ff;
-      --muted:#b9c4e2;
-      --line: rgba(255,255,255,.12);
-      --shadow: 0 14px 40px rgba(0,0,0,.35);
+      --card:#0f1a2d;
+      --text:#e9f0ff;
+      --muted:rgba(233,240,255,.72);
+      --line:rgba(233,240,255,.12);
+      --accent:#38bdf8;
+      --accent2:#22c55e;
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --radius:22px;
+      --max: 980px;
+      --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, "Noto Sans Hebrew", "Rubik", sans-serif;
     }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:#f6f8fc; --card:#ffffff; --text:#0b1220; --muted:rgba(11,18,32,.70);
+        --line:rgba(11,18,32,.10); --shadow: 0 20px 60px rgba(2,6,23,.12);
+      }
+    }
+    html,body{height:100%}
     body{
       margin:0;
-      font-family: system-ui, -apple-system, "Segoe UI", Arial, "Noto Sans Hebrew", "Rubik", "Assistant", sans-serif;
-      color: var(--text);
+      font-family:var(--font);
       background:
-        radial-gradient(1000px 520px at 85% 6%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%),
-        radial-gradient(900px 520px at 20% 12%, color-mix(in srgb, var(--accent2) 14%, transparent), transparent 70%),
-        linear-gradient(180deg, var(--bg), var(--bg2));
-      line-height: 1.62;
+        radial-gradient(1000px 520px at 85% 0%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 70%),
+        radial-gradient(900px 520px at 10% 95%, color-mix(in srgb, var(--accent2) 14%, transparent), transparent 70%),
+        linear-gradient(180deg, var(--bg), var(--bg));
+      color:var(--text);
+      line-height:1.55;
     }
-
-    .wrap{max-width: var(--max); margin: 0 auto; padding: 18px 16px 90px;}
-
-    /* Top bar */
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding: 18px 16px 120px;}
     .topbar{
       position: sticky; top: 0; z-index: 50;
-      background: color-mix(in srgb, var(--bg) 88%, transparent);
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background: color-mix(in srgb, var(--bg) 70%, transparent);
       border-bottom: 1px solid var(--line);
     }
     .topbar-inner{
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 12px 16px;
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      flex-wrap:wrap;
+      max-width:var(--max); margin:0 auto; padding: 12px 16px;
+      display:flex; align-items:center; justify-content:space-between; gap: 12px;
     }
-    .brand{display:flex; gap:10px; align-items:center; min-width:0}
-    .spark{
-      width:12px; height:12px; border-radius:50%;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      box-shadow: 0 0 18px color-mix(in srgb, var(--accent) 35%, transparent);
-      flex:0 0 auto;
+    .brand{display:flex; align-items:center; gap:10px}
+    .logo{
+      width:38px; height:38px; border-radius: 16px;
+      background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 30%, transparent), color-mix(in srgb, var(--accent2) 26%, transparent));
+      border:1px solid var(--line);
+      box-shadow: 0 12px 30px rgba(0,0,0,.18);
     }
-    .brand .title{font-weight: 900; white-space:nowrap}
-    .brand .sub{color: var(--muted); font-size: 13px; margin-right: 8px; white-space:nowrap}
-
-    .actions{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+    .title{font-weight:1000; letter-spacing:.2px}
+    .subtitle{color:var(--muted); font-size: 13.8px}
+    .actions{display:flex; gap:8px; flex-wrap:wrap}
+    a.btn{display:inline-flex; align-items:center; justify-content:center; text-decoration:none;}
     .btn{
-      border:1px solid var(--line);
-      background: var(--card);
-      color: var(--text);
-      padding:9px 11px;
-      border-radius: 12px;
-      text-decoration:none;
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
+      appearance:none; border:1px solid var(--line);
+      background: color-mix(in srgb, var(--card) 88%, transparent);
+      color:inherit;
+      padding: 9px 12px; border-radius: 14px;
+      font-weight: 900; font-size: 13px;
       cursor:pointer;
-      box-shadow: 0 8px 18px rgba(15, 23, 42, .06);
-      transition: transform .08s ease, box-shadow .18s ease, border-color .18s ease;
-      user-select:none;
-      font-size: 13.5px;
-      white-space:nowrap;
+      transition: transform .14s ease, box-shadow .18s ease, border-color .18s ease;
+      box-shadow: 0 12px 30px rgba(0,0,0,.16);
     }
-    .btn:hover{transform: translateY(-1px); box-shadow: var(--shadow); border-color: color-mix(in srgb, var(--accent) 28%, var(--line))}
-    .btn:active{transform: translateY(0px)}
-    .search{
-      display:flex; align-items:center; gap:8px;
-      border:1px solid var(--line);
-      background: var(--card);
-      border-radius: 12px;
-      padding: 8px 10px;
-      min-width: 240px;
-      box-shadow: 0 8px 18px rgba(15, 23, 42, .06);
-    }
-    .search input{
-      border:none; outline:none; background: transparent;
-      font-size: 14px; width: 100%;
-      color: var(--text);
-    }
-    .search .hint{color: var(--muted); font-size: 12px}
+    .btn:hover{transform: translateY(-1px); box-shadow: var(--shadow); border-color: color-mix(in srgb, var(--accent2) 22%, var(--line));}
+    .btn:disabled{opacity:.5; cursor:not-allowed; transform:none}
+    :focus-visible{outline:3px solid color-mix(in srgb, var(--accent2) 55%, transparent); outline-offset:3px; border-radius:14px;}
 
     .progress{
-      height: 5px;
-      background: color-mix(in srgb, var(--line) 70%, transparent);
+      height: 3px; background: transparent;
     }
-    .progress > div{
-      height:100%;
-      width:0%;
+    .bar{
+      height:3px; width:0%;
       background: linear-gradient(90deg, var(--accent), var(--accent2));
-      transition: width .1s linear;
-    }
-
-    /* Layout: sidebar on desktop, stacked on mobile */
-    .grid{
-      display:grid;
-      grid-template-columns: 300px 1fr;
-      gap: 14px;
-      margin-top: 14px;
-      align-items:start;
-    }
-    @media (max-width: 980px){
-      .grid{grid-template-columns: 1fr}
-      .search{min-width: 180px}
-      .brand .sub{display:none}
-    }
-
-    /* Sidebar TOC (desktop) */
-    .toc{
-      position: sticky;
-      top: 92px;
-      border:1px solid var(--line);
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 12px 12px;
-    }
-    @media (max-width: 980px){ .toc{display:none} }
-    .toc h3{margin: 0 0 10px; font-size: 14px; color: var(--muted)}
-    .toc a{
-      display:flex; gap:10px; align-items:center;
-      text-decoration:none;
-      padding: 9px 10px;
-      border-radius: 12px;
-      color: var(--text);
-      border: 1px solid transparent;
-      transition: background .18s ease, border-color .18s ease, transform .08s ease;
-      margin-top: 8px;
-    }
-    .toc a:hover{
-      background: color-mix(in srgb, var(--accent2) 8%, transparent);
-      border-color: color-mix(in srgb, var(--accent2) 20%, var(--line));
-      transform: translateY(-1px);
-    }
-    .toc .n{
-      width:26px; height:26px; border-radius:10px;
-      display:flex; align-items:center; justify-content:center;
-      font-weight: 900;
-      background: color-mix(in srgb, var(--accent) 12%, transparent);
-      color: color-mix(in srgb, var(--accent) 90%, var(--text));
-      flex:0 0 auto;
-      font-size: 13px;
-    }
-    .toc .mini{
-      margin-top: 10px;
-      padding: 10px 10px;
-      border-radius: 14px;
-      border: 1px dashed color-mix(in srgb, var(--accent) 22%, var(--line));
-      background: color-mix(in srgb, var(--accent) 6%, transparent);
-      color: var(--muted);
-      font-size: 12.5px;
-    }
-
-    
-    /* Cover + flow */
-    .cover{
-      margin-top: 14px;
-      border: 1px solid var(--line);
-      border-radius: 26px;
-      background: linear-gradient(135deg,
-        color-mix(in srgb, var(--accent) 14%, var(--card)),
-        color-mix(in srgb, var(--accent2) 10%, var(--card))
-      );
-      box-shadow: var(--shadow);
-      padding: 18px 18px 14px;
-      position: relative;
-      overflow:hidden;
-    }
-    .cover:before{
-      content:"";
-      position:absolute; inset:-2px;
-      background:
-        radial-gradient(700px 320px at 85% 0%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%),
-        radial-gradient(540px 300px at 10% 35%, color-mix(in srgb, var(--accent2) 18%, transparent), transparent 72%);
-      opacity:.9; pointer-events:none;
-    }
-    .cover > *{position:relative}
-    .cover-top{
-      display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap;
-    }
-    .badge{
-      display:inline-flex; gap:10px; align-items:center;
-      padding:8px 12px;
       border-radius: 999px;
-      border: 1px solid var(--line);
-      background: color-mix(in srgb, var(--card) 80%, transparent);
-      color: var(--muted);
-      font-size: 13px;
-      box-shadow: 0 8px 18px rgba(15,23,42,.06);
-    }
-    .cover h2{
-      margin: 10px 0 6px;
-      font-size: 34px;
-      letter-spacing: .2px;
-    }
-    .cover p{margin:0; color: var(--muted); max-width: 90ch}
-    .flow{
-      margin-top: 14px;
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap:10px;
-      align-items:stretch;
-    }
-    @media (max-width: 820px){
-      .flow{grid-template-columns:1fr; }
-    }
-    .node{
-      border: 1px solid var(--line);
-      background: color-mix(in srgb, var(--card) 88%, transparent);
-      border-radius: 18px;
-      padding: 12px 12px;
-      box-shadow: 0 10px 22px rgba(15,23,42,.06);
-      position:relative;
-      overflow:hidden;
-    }
-    .node:before{
-      content:"";
-      position:absolute; inset:-2px;
-      background: radial-gradient(420px 180px at 85% 0%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 70%);
-      opacity:.7; pointer-events:none;
-    }
-    .node > *{position:relative}
-    .node .k{display:flex; gap:10px; align-items:center; font-weight: 950}
-    .node .k .i{
-      width:34px; height:34px;
-      border-radius: 14px;
-      display:flex; align-items:center; justify-content:center;
-      background: color-mix(in srgb, var(--accent2) 12%, transparent);
-    }
-    .node .d{margin-top: 6px; color: var(--muted); font-size: 13.5px}
-    /* arrows */
-    @media (min-width: 821px){
-      .node:not(:last-child)::after{
-        content:"➜";
-        position:absolute;
-        left:-18px;
-        top:50%;
-        transform: translateY(-50%);
-        font-weight: 1000;
-        color: color-mix(in srgb, var(--accent) 55%, var(--muted));
-        font-size: 18px;
-      }
     }
 
-    
-    /* Extra "wow" blocks */
-    .stats{
-      margin-top: 14px;
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-    }
-    @media (max-width: 920px){ .stats{grid-template-columns: repeat(2, 1fr)} }
-    .stat{
-      border:1px solid var(--line);
-      background: color-mix(in srgb, var(--card) 86%, transparent);
-      border-radius: 18px;
-      padding: 12px 12px;
-      box-shadow: 0 10px 22px rgba(15,23,42,.06);
-      position:relative;
-      overflow:hidden;
-      transition: transform .10s ease, box-shadow .18s ease, border-color .18s ease;
-    }
-    .stat:hover{transform: translateY(-1px); box-shadow: var(--shadow); border-color: color-mix(in srgb, var(--accent) 22%, var(--line))}
-    .stat .big{font-size: 20px; font-weight: 1000; letter-spacing:.2px}
-    .stat .label{color: var(--muted); font-size: 13px; margin-top: 2px}
-    .stat .icon{
-      position:absolute;
-      left: 12px;
-      top: 12px;
-      width: 34px; height: 34px;
-      border-radius: 14px;
-      display:flex; align-items:center; justify-content:center;
-      background: color-mix(in srgb, var(--accent2) 12%, transparent);
-      opacity:.95;
-    }
-
-    .audience{
-      margin-top: 12px;
-      display:grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 10px;
-    }
-    @media (max-width: 920px){ .audience{grid-template-columns: 1fr} }
-    .aud{
-      border:1px solid var(--line);
-      background: color-mix(in srgb, var(--bg) 55%, var(--card));
-      border-radius: 18px;
-      padding: 12px 12px;
-      transition: transform .10s ease, border-color .18s ease, background .18s ease;
-    }
-    .aud:hover{transform: translateY(-1px); border-color: color-mix(in srgb, var(--accent2) 24%, var(--line))}
-    .aud .h{font-weight: 1000; display:flex; gap:10px; align-items:center}
-    .aud .p{margin-top: 6px; color: var(--muted); font-size: 13.5px}
-
-    /* Presentation clean mode */
-    body.present .toc,
-    body.present .toc-mobile,
-    body.present .mobile-nav,
-    body.present .progress,
-    body.present .search,
-    body.present #copyLink{
-      display:none !important;
-    }
-    body.present .wrap{max-width: 980px}
-    body.present h1{font-size: 34px}
-    body.present .subtitle{font-size: 16px}
-    body.present section.card{padding: 18px 18px 16px}
-    body.present .ch-title{font-size: 19px}
-    body.present li{font-size: 14px}
-    body.present .topbar{border-bottom:none}
-    body.present .topbar-inner{justify-content:space-between}
-    body.present .brand .sub{display:none}
-    body.present .btn{padding: 10px 12px}
-
-    /* Subtle reveal */
-    .reveal{opacity:1; transform:none;}
-    .reveal.is-visible{opacity:1; transform:none;}
-
-    /* Hero */
     .hero{
+      margin-top: 16px;
       border:1px solid var(--line);
-      background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 8%, var(--card)), var(--card));
-      border-radius: 22px;
+      border-radius: var(--radius);
+      background: color-mix(in srgb, var(--card) 92%, transparent);
       box-shadow: var(--shadow);
-      padding: 16px 16px 14px;
+      padding: 16px 16px;
       position:relative;
       overflow:hidden;
     }
@@ -360,802 +99,552 @@
       content:"";
       position:absolute; inset:-2px;
       background:
-        radial-gradient(650px 260px at 85% 0%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 70%),
-        radial-gradient(520px 240px at 10% 25%, color-mix(in srgb, var(--accent2) 16%, transparent), transparent 70%);
+        radial-gradient(740px 280px at 92% 0%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 70%),
+        radial-gradient(640px 280px at 12% 90%, color-mix(in srgb, var(--accent2) 14%, transparent), transparent 70%);
       opacity:.9; pointer-events:none;
     }
     .hero > *{position:relative}
-    h1{margin:0 0 6px; font-size: 28px; letter-spacing:.2px}
-    .subtitle{margin:0; color: var(--muted); max-width: 92ch; font-size: 15px}
-    .chips{display:flex; flex-wrap:wrap; gap:10px; margin-top: 12px}
+    h1{margin:0; font-size: 30px; font-weight:1000; line-height:1.1}
+    .lead{margin-top:10px; color:var(--muted); font-size: 15px}
+    .chips{margin-top:12px; display:flex; gap:8px; flex-wrap:wrap}
     .chip{
-      display:inline-flex; gap:10px; align-items:center;
-      padding: 9px 11px;
-      border-radius: 999px;
-      border:1px solid var(--line);
-      background: var(--card);
-      font-size: 13px;
-      box-shadow: 0 6px 16px rgba(15,23,42,.06);
-    }
-    .chip b{font-weight:900}
-
-    /* Sections */
-    section.card{
-      margin-top: 0;
-    }
-    section.card + section.card{margin-top: 10px;}
-      border:1px solid var(--line);
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 14px 14px 12px;
-    }
-    .chapter{
-      display:flex;
-      align-items:flex-start;
-      gap:12px;
-      margin-bottom: 10px;
-    }
-    .ch-num{
-      width:38px; height:38px;
-      border-radius: 14px;
-      display:flex; align-items:center; justify-content:center;
-      font-weight: 1000;
-      background: linear-gradient(135deg, rgba(79,70,229,.95), rgba(6,182,212,.88));
-      color: #071026;
-      flex: 0 0 auto;
-      box-shadow: 0 10px 20px rgba(15,23,42,.12);
-    }
-    .ch-title{margin:0; font-size: 18px; font-weight: 950}
-    .ch-sub{margin:2px 0 0; color: var(--muted); font-size: 13.5px}
-
-    .tools{display:flex; gap:8px; flex-wrap:wrap; margin-top: 8px}
-    .toolbtn{
       border:1px solid var(--line);
       background: color-mix(in srgb, var(--bg) 55%, var(--card));
-      color: var(--text);
-      padding:8px 10px;
-      border-radius: 12px;
-      cursor:pointer;
-      font-size: 13px;
-      transition: transform .06s ease, border-color .18s ease, background .18s ease;
-      user-select:none;
-    }
-    .toolbtn:hover{border-color: color-mix(in srgb, var(--accent) 20%, var(--line))}
-    .toolbtn:active{transform: translateY(1px)}
-
-    p{margin: 8px 0 0}
-    .muted{color: var(--muted)}
-    ul{margin:10px 0 0; padding:0; list-style:none; display:grid; gap:8px}
-    li{
-      border:1px solid var(--line);
-      background: color-mix(in srgb, var(--bg) 55%, var(--card));
-      padding: 10px 12px;
-      border-radius: 14px;
-    }
-    .callout{
-      margin-top: 8px;
-      border:1px solid color-mix(in srgb, var(--accent) 25%, var(--line));
-      background: color-mix(in srgb, var(--accent) 7%, transparent);
-      padding: 12px 12px;
-      border-radius: 14px;
-      margin-top: 10px;
-    }
-    .callout.warn{
-      border-color: color-mix(in srgb, var(--warn) 30%, var(--line));
-      background: color-mix(in srgb, var(--warn) 10%, transparent);
-    }
-
-    /* Compare */
-    .compare{display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top: 10px}
-    @media (max-width: 720px){ .compare{grid-template-columns: 1fr} }
-    .panel{
-      border:1px solid var(--line);
-      border-radius: 16px;
-      padding: 12px 12px;
-      background: color-mix(in srgb, var(--card) 90%, transparent);
-    }
-    .panel h3{margin:0 0 8px; font-size: 15.5px; display:flex; gap:8px; align-items:center}
-    .tag{
-      font-size: 12px;
-      padding: 3px 9px;
       border-radius: 999px;
-      border:1px solid var(--line);
-      color: var(--muted);
-      background: color-mix(in srgb, var(--bg) 60%, var(--card));
+      padding: 7px 10px;
+      font-weight: 900; font-size: 12.8px;
+      color: color-mix(in srgb, var(--text) 92%, var(--muted));
     }
 
-    /* Solutions */
-    .two{display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top: 10px}
-    @media (max-width: 900px){ .two{grid-template-columns: 1fr} }
-    .solution{
-      border:1px solid var(--line);
-      border-radius: 16px;
-      padding: 12px 12px;
-      background: linear-gradient(180deg, color-mix(in srgb, var(--accent2) 9%, var(--card)), var(--card));
-      position:relative;
-      overflow:hidden;
-    }
-    .solution:before{
-      content:"";
-      position:absolute; inset:-2px;
-      background: radial-gradient(520px 220px at 85% 0%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%);
-      opacity:.7; pointer-events:none;
-    }
-    .solution > *{position:relative}
-    .solution h3{margin:0 0 8px; font-size: 16px}
-    .mini{margin-top: 8px; color: var(--muted); font-size: 13.2px}
-
-    /* FAQ */
-    .faq{display:grid; gap:8px; margin-top: 10px}
-    details{
-      border:1px solid var(--line);
-      border-radius: 14px;
-      padding: 10px 12px;
-      background: color-mix(in srgb, var(--bg) 60%, var(--card));
-    }
-    details summary{
-      cursor:pointer;
-      font-weight: 900;
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-      list-style:none;
-    }
-    details summary::-webkit-details-marker{display:none}
-    details summary:after{
-      content:"▾";
-      color: var(--muted);
-      font-weight: 900;
-      transition: transform .18s ease;
-    }
-    details[open] summary:after{transform: rotate(180deg)}
-    details p{margin:8px 0 0; color: var(--muted)}
-
-    /* Mobile TOC card */
-    .toc-mobile{
-      display:none;
+    .section{
       margin-top: 14px;
       border:1px solid var(--line);
-      background: var(--card);
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 12px 12px;
+      background: color-mix(in srgb, var(--card) 92%, transparent);
+      box-shadow: 0 18px 50px rgba(0,0,0,.25);
+      padding: 14px 14px;
     }
-    @media (max-width: 980px){ .toc-mobile{display:block} }
-    .toc-mobile .links{display:grid; gap:10px; margin-top: 10px}
+    .sec-head{display:flex; gap:12px; align-items:flex-start}
+    .badge{
+      width: 42px; height: 42px; border-radius: 18px;
+      border:1px solid var(--line);
+      background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 16%, transparent), color-mix(in srgb, var(--accent2) 14%, transparent));
+      display:flex; align-items:center; justify-content:center;
+      flex: 0 0 auto;
+      box-shadow: 0 12px 30px rgba(0,0,0,.18);
+      font-size: 18px;
+    }
+    .sec-title{font-weight:1000; font-size: 18px; margin:0}
+    .sec-sub{color:var(--muted); margin-top:4px; font-size: 14px}
 
-    /* Bottom nav for mobile */
-    .mobile-nav{
-      display:none;
-      position: fixed;
-      left: 14px;
-      right: 14px;
-      bottom: 14px;
-      gap: 10px;
-      z-index: 60;
-      grid-template-columns: repeat(4, 1fr);
-    }
-    @media (max-width: 980px){ .mobile-nav{display:grid} }
-    .mobile-nav a{
-      text-decoration:none;
-      text-align:center;
+    .takeaway{
+      margin-top: 12px;
+      border: 1px solid color-mix(in srgb, var(--accent2) 22%, var(--line));
+      background: linear-gradient(180deg, color-mix(in srgb, var(--accent2) 10%, transparent), transparent);
+      border-radius: 18px;
       padding: 10px 10px;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      background: color-mix(in srgb, var(--card) 85%, transparent);
-      backdrop-filter: blur(10px);
-      color: var(--text);
-      font-size: 13px;
-      box-shadow: 0 10px 22px rgba(15,23,42,.06);
+      display:flex; gap:10px; align-items:flex-start;
     }
-    .mobile-nav a:active{transform: translateY(1px)}
+    .takeaway .ic{
+      width: 34px; height: 34px; border-radius: 14px;
+      display:flex; align-items:center; justify-content:center;
+      background: color-mix(in srgb, var(--accent2) 14%, transparent);
+      flex:0 0 auto;
+    }
+    .takeaway .tx{font-size: 14px}
+    .grid{
+      margin-top: 12px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    @media (max-width: 860px){ .grid{grid-template-columns: 1fr;} .actions{display:none} }
+    .card2{
+      border:1px solid var(--line);
+      border-radius: 18px;
+      padding: 12px 12px;
+      background: color-mix(in srgb, var(--bg) 55%, var(--card));
+    }
+    .card2 .h{font-weight:1000}
+    .card2 .p{margin-top:6px; color:var(--muted); font-size: 13.8px}
+    ul{margin:10px 0 0; padding-inline-start: 18px; color: var(--muted)}
+    li{margin:6px 0}
+    .divider{height:1px; background: var(--line); margin: 12px 0;}
 
-    /* Toast */
-    .toast{
-      position: fixed;
-      bottom: 80px;
-      left: 16px;
-      right: 16px;
-      max-width: 520px;
-      margin: 0 auto;
-      background: rgba(0,0,0,.72);
-      color: #fff;
-      border: 1px solid rgba(255,255,255,.18);
-      border-radius: 16px;
-      padding: 10px 12px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 16px 40px rgba(0,0,0,.30);
-      opacity: 0;
-      transform: translateY(8px);
-      transition: opacity .2s ease, transform .2s ease;
-      pointer-events:none;
-      z-index: 999;
-      font-size: 13.5px;
     }
-    .toast.show{opacity:1; transform: translateY(0)}
+
+    .topbtn{
+      position: fixed;
+      right: 16px;
+      bottom: 86px;
+      z-index: 60;
+      display:none;
+    }
+
+    @media (prefers-reduced-motion: no-preference){
+      .section, .hero{transition: transform .14s ease, box-shadow .18s ease, border-color .18s ease}
+      .section:hover{transform: translateY(-1px); border-color: color-mix(in srgb, var(--accent) 18%, var(--line));}
+    }
 
     
-    /* Premium motion (safe: no hidden content) */
-    @media (prefers-reduced-motion: no-preference){
-      body:before, body:after{
-        content:"";
-        position: fixed;
-        width: 520px; height: 520px;
-        border-radius: 999px;
-        filter: blur(40px);
-        opacity: .10;
-        z-index: -1;
-        pointer-events:none;
-        animation: floaty 14s ease-in-out infinite;
-      }
-      body:before{
-        right: -180px; top: 120px;
-        background: radial-gradient(circle at 30% 30%, var(--accent), transparent 60%);
-      }
-      body:after{
-        left: -200px; bottom: 120px;
-        background: radial-gradient(circle at 30% 30%, var(--accent2), transparent 60%);
-        animation-duration: 18s;
-      }
-      @keyframes floaty{
-        0%,100%{ transform: translate3d(0,0,0) scale(1); }
-        50%{ transform: translate3d(0,-18px,0) scale(1.04); }
-      }
+    /* Premium + official tweaks */
 
-      .btn, .toolbtn, .toc a, .stat, .aud, .panel, .solution, details, li{
-        transition: transform .14s ease, box-shadow .22s ease, border-color .22s ease, background .22s ease;
-      }
+    .toast{
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 92px;
+      z-index: 80;
+      background: color-mix(in srgb, var(--card) 92%, transparent);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 10px 12px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.28);
+      font-weight: 900;
+      font-size: 13px;
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .18s ease, transform .18s ease;
+    }
+    .toast.show{opacity:1; transform: translateX(-50%) translateY(-2px);}
 
-      .btn{
-        position: relative;
-        overflow:hidden;
-      }
-      .btn:before{
-        content:"";
-        position:absolute;
-        inset:-40% -60%;
-        background: linear-gradient(120deg, transparent 35%, rgba(255,255,255,.35) 50%, transparent 65%);
-        transform: translateX(120%);
-        transition: transform .7s ease;
-        pointer-events:none;
-      }
-      .btn:hover:before{ transform: translateX(-10%); }
-      .btn:hover{ transform: translateY(-1px); box-shadow: var(--shadow); }
-
-      .toc a{ position: relative; }
-      .toc a:after{
-        content:"";
-        position:absolute;
-        right: 10px;
-        bottom: 8px;
-        height: 2px;
-        width: 0%;
-        background: linear-gradient(90deg, var(--accent), var(--accent2));
-        border-radius: 999px;
-        transition: width .22s ease;
-        opacity:.85;
-      }
-      .toc a:hover:after{ width: 55%; }
-
-      /* Card hover glow */
-      section.card:hover{
-        border-color: color-mix(in srgb, var(--accent) 18%, var(--line));
-        box-shadow: 0 16px 44px rgba(15,23,42,.10);
-        transform: translateY(-1px);
-      }
-
-      /* Target highlight when navigating */
-      :target{
-        scroll-margin-top: 110px;
-      }
-      section.card:target, .cover:target, .hero:target{
-        outline: 2px solid color-mix(in srgb, var(--accent2) 55%, transparent);
-        outline-offset: 4px;
-        animation: targetPulse .9s ease-out 1;
-      }
-      @keyframes targetPulse{
-        0%{ outline-color: color-mix(in srgb, var(--accent2) 0%, transparent); }
-        40%{ outline-color: color-mix(in srgb, var(--accent2) 70%, transparent); }
-        100%{ outline-color: color-mix(in srgb, var(--accent2) 45%, transparent); }
-      }
-
-      /* FAQ open/close micro motion */
-      details[open]{ box-shadow: 0 14px 36px rgba(15,23,42,.10); }
+    .btn.primary{
+      border-color: color-mix(in srgb, var(--accent) 28%, var(--line));
+      background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 22%, transparent), color-mix(in srgb, var(--accent2) 14%, transparent));
+    }
+    .btn.primary:hover{
+      border-color: color-mix(in srgb, var(--accent2) 30%, var(--line));
     }
 
-    /* Keep reveal neutral (no hidden content) */
-    .reveal{opacity:1; transform:none;}
-    .reveal.is-visible{opacity:1; transform:none;}
+    .nav-bar{
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 14px;
+      z-index: 60;
+      width: min(var(--max), calc(100% - 24px));
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 10px;
+      border:1px solid var(--line);
+      border-radius: 18px;
+      background: color-mix(in srgb, var(--bg) 72%, transparent);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 18px 60px rgba(0,0,0,.28);
+    }
+    .nav-meta{
+      font-weight: 950;
+      font-size: 13px;
+      color: color-mix(in srgb, var(--text) 88%, var(--muted));
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 48%;
+    }
+    .nav-actions{display:flex; gap:10px; align-items:center}
+    @media (max-width: 860px){
+      .nav-bar{bottom: 10px; padding: 10px 10px}
+      .nav-meta{max-width: 42%;}
+      .actions{display:none}
+    }
+    /* Hide nav bar at the very top (optional) */
+        @media (prefers-reduced-motion: no-preference){
+      .nav-bar{transition: opacity .18s ease, transform .18s ease, border-color .18s ease;}
+    }
 
-    /* Print */
-    @media print{
-      .topbar, .toc, .toc-mobile, .mobile-nav, .tools{display:none !important}
-      body{background:#fff}
-      section.card, .hero{box-shadow:none}
-      .grid{grid-template-columns: 1fr}
-      .wrap{padding-bottom: 14px}
+
+
+    
+    .btn.disabled{
+      opacity: .5;
+      pointer-events: none;
+      transform: none !important;
+      box-shadow: 0 12px 30px rgba(0,0,0,.10);
+    }
+
+
+    /* Presentation mode (clean) */
+    body.present .topbar{display:none;}
+    body.present .nav-bar{display:none;}
+    body.present .topbtn{bottom: 14px;}
+    body.present .wrap{padding-top: 8px;}
+
+
+@media print{
+      .topbar, .nav-fab, .topbtn{display:none !important;}
+      body{background:#fff; color:#000}
+      .hero, .section{box-shadow:none}
+      .wrap{padding:0}
+      a{color:#000; text-decoration:none}
     }
   </style>
 </head>
-
 <body>
   <div class="topbar">
     <div class="topbar-inner">
       <div class="brand">
-        <span class="spark"></span>
-        <div class="title">הסדר סטודנט חדש</div>
-        <div class="sub">מסמך קצר, מסודר ואינטואיטיבי לוועדה</div>
-      </div>
-
-      <div class="actions">
-        <div class="search" title="חיפוש בתוך המסמך">
-          🔎 <input id="q" type="search" placeholder="חיפוש… (18 שעות / 3 קורסים)" />
-          <span class="hint" id="hits"></span>
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <div class="title">הסדר סטודנט חדש</div>
+          <div class="subtitle">מסמך להצגה לוועדה — קצר, ברור וישיר</div>
         </div>
-        <button class="btn" id="toggleTheme" type="button">🌓 מצב כהה</button>
-        <button class="btn" id="togglePresent" type="button">🧼 מצב הצגה נקי</button>
-        <button class="btn" onclick="window.print()">🖨️ PDF</button>
-        <button class="btn" id="copyLink" type="button">🔗 העתק קישור</button>
+      </div>
+      <div class="actions">
+        <button class="btn" id="printBtn" type="button">🖨️ PDF</button>
+        <button class="btn" id="copyBtn" type="button">🔗 העתק קישור</button>
+        <button class="btn" id="waBtn" type="button">🟢 וואטסאפ</button>
+        <button class="btn" id="presentBtn" type="button">🧼 מצב הצגה</button>
+        <button class="btn" id="darkBtn" type="button">🌙 מצב כהה</button>
       </div>
     </div>
-    <div class="progress" aria-hidden="true"><div id="pbar"></div></div>
+    <div class="progress"><div class="bar" id="bar"></div></div>
   </div>
 
-  <div class="wrap" id="top">
-    <div class="grid">
-      <aside class="toc" aria-label="תוכן עניינים (מחשב)">
-        <h3>תוכן עניינים</h3>
-        <a href="#cover"><span class="n">★</span> <span>עמוד פתיחה + תרשים</span></a>
-        <a href="#p0"><span class="n">0</span> <span>מה המטרה</span></a>
-        <a href="#p1"><span class="n">1</span> <span>הסדר קודם (כולל 18 שעות)</span></a>
-        <a href="#p2"><span class="n">2</span> <span>הבעיה והפערים</span></a>
-        <a href="#p2b"><span class="n">👥</span> <span>למי זה מתאים</span></a>
-        <a href="#p3"><span class="n">3</span> <span>היה מול צריך</span></a>
-        <a href="#p4"><span class="n">4</span> <span>עקרונות המדידה</span></a>
-        <a href="#p5"><span class="n">5</span> <span>2 פתרונות</span></a>
-<a href="#p6"><span class="n">6</span> <span>FAQ</span></a>
-        <a href="#p7"><span class="n">7</span> <span>סיכום</span></a>
-        <a href="#p8"><span class="n">8</span> <span>שקף סיום</span></a>
-        <div class="mini">טיפ: אפשר להדפיס/לשמור כ-PDF מהכפתור למעלה.</div>
-      </aside>
+  <div class="wrap">
+    <section class="hero" id="cover">
+      <h1>הסדר סטודנט חדש</h1>
+      <div class="lead">
+        הסדר הסטודנטים הקיים נבנה לפי מודל לימודים “קלאסי” של שעות בכיתה, אבל העולם השתנה.<br>
+        היום יש מסלולים גמישים כמו האוניברסיטה הפתוחה, היברידי ושילוב עבודה–לימודים — ועדיין מדובר בלימודים אמיתיים ומחייבים.<br>
+        בפועל, ההסדר מתגמל “מערכת שעות” ולא התקדמות לימודית.<br>
+        המטרה היא לעדכן את ההסדר כך שיהיה הוגן, ברור, וייתן לכל צעיר את הזכות לבחור מסלול שמתאים לו.
+      </div>
+      <div class="chips" aria-label="נקודות מפתח">
+        <span class="chip">מדידה לפי לימודים</span>
+        <span class="chip">מינימום 3 קורסים</span>
+        <span class="chip">הוכחת לימודים (ללא ציונים)</span>
+        <span class="chip">2 פתרונות ישימים</span>
+      </div>
+    </section>
 
-      <div>
-        
-        <div class="cover" id="cover">
-          <div class="cover-top">
-            <div class="badge">👨‍🎓 מוגש לוועדה • מסמך מסודר ומדיד</div>
-            <div class="badge">🧩 קצר • אינטואיטיבי • בר-יישום</div>
-          </div>
-          <h2>הסדר סטודנט חדש</h2>
-          <p>
-            מסמך קצר להצגה: <b>הסדר קודם</b> → <b>פערים</b> → <b>שינוי נדרש</b> → <b>שני פתרונות</b>.
-            במקום למדוד <b>18 שעות בכיתה</b>, עוברים למדד שמייצג לימודים אמיתיים בכל מסלול מוכר: <b>3 קורסים בסמסטר + הוכחת לימודים</b>.
-          </p>
-
-          <div class="flow" aria-label="תרשים זרימה">
-            <div class="node">
-              <div class="k"><span class="i">🕰️</span>הסדר קודם</div>
-              <div class="d">נמדד בפועל לפי “מערכת שעות” (מינימום 18 שעות).</div>
-            </div>
-            <div class="node">
-              <div class="k"><span class="i">⚠️</span>פערים</div>
-              <div class="d">מסלולים גמישים פחות “נראים” — למרות עומס לימודים אמיתי.</div>
-            </div>
-            <div class="node">
-              <div class="k"><span class="i">🔧</span>שינוי נדרש</div>
-              <div class="d">מודדים מסגרת לימודים מוכחת, לא שעות בכיתה.</div>
-            </div>
-            <div class="node">
-              <div class="k"><span class="i">✅</span>פתרונות</div>
-              <div class="d">שני מודלים ישימים: אוטומטי לשנים / חידוש שנתי.</div>
-            </div>
-          </div>
-
-          <div class="stats" aria-label="נתונים מהירים">
-            <div class="stat">
-              <div class="icon">🕒</div>
-              <div class="big">18 שעות</div>
-              <div class="label">כך נמדד בפועל בהסדר הקודם</div>
-            </div>
-            <div class="stat">
-              <div class="icon">📚</div>
-              <div class="big">3 קורסים</div>
-              <div class="label">סף מינימום מוצע בסמסטר</div>
-            </div>
-            <div class="stat">
-              <div class="icon">🗓️</div>
-              <div class="big">4–5 שנים</div>
-              <div class="label">מסגרת זכאות אפשרית</div>
-            </div>
-            <div class="stat">
-              <div class="icon">🧾</div>
-              <div class="big">בלי ציונים</div>
-              <div class="label">בקרה לפי הוכחת לימודים בלבד</div>
-            </div>
-          </div>
-
+    <section class="section" id="old">
+      <div class="sec-head">
+        <div class="badge">🕒</div>
+        <div>
+          <div class="sec-title">1) ההסדר הקודם</div>
+          <div class="sec-sub">איך הוא עובד בפועל — ומה הוא “מתגמל”<br><span class="chip">סטטוס: קיים כיום</span></div>
         </div>
+      </div>
 
-        <div class="hero">
-          <h1>הסדר סטודנט חדש</h1>
-          <p class="subtitle">
-            מסמך להצגה: <b>מה היה</b> → <b>מה הבעיה</b> → <b>מה לשנות</b> → <b>שני פתרונות</b>.
-            המפתח: לא למדוד “נראות” (שעות בכיתה), אלא <b>מסגרת לימודים מוכחת</b>.
-          </p>
-          <div class="chips">
-            <div class="chip">🧠 <b>העיקרון:</b> מודדים לימודים, לא מערכת שעות</div>
-            <div class="chip">📚 <b>סף מינימום:</b> 3 קורסים בסמסטר + הוכחה</div>
-            <div class="chip">🧾 <b>בקרה:</b> תעודת סטודנט/אישור הרשמה (בלי ציונים)</div>
-          </div>
-          <div class="callout">
-            <b>משפט פתיחה לוועדה:</b> ההסדר הקיים מתגמל “מערכת שעות” ולא לימודים — ולכן אינו מותאם ללמידה הגמישה של היום.
-          </div>
-        </div>
+      <div class="takeaway">
+        <div class="ic">🎯</div>
+        <div class="tx"><b>בשורה התחתונה:</b> ההסדר הקודם נשען בפועל על “מערכת שעות”, כולל דרישת מינימום של <b>18 שעות</b> — וזה לא משקף עומס לימודים במסלולים גמישים.</div>
+      </div>
 
-        <div class="toc-mobile" aria-label="תוכן עניינים (נייד)">
-          <div class="chapter" style="margin-bottom:0">
-            <div class="ch-num">☰</div>
-            <div>
-              <div class="ch-title">תוכן עניינים</div>
-              <div class="ch-sub">לחיצה מהירה לפרקים</div>
-            </div>
-          </div>
-          <div class="links">
-            <a class="btn" href="#cover">★ עמוד פתיחה</a>
-            <a class="btn" href="#p0">0) מה המטרה</a>
-            <a class="btn" href="#p1">1) הסדר קודם</a>
-            <a class="btn" href="#p2">2) פערים</a>
-            <a class="btn" href="#p2b">👥 למי זה מתאים</a>
-            <a class="btn" href="#p5">5) פתרונות</a>
-<a class="btn" href="#p6">6) FAQ</a>
-            <a class="btn" href="#p7">7) סיכום</a>
-            <a class="btn" href="#p8">8) שקף סיום</a>
-          </div>
-        </div>
-
-        <!-- 0 -->
-        <section class="card" id="p0">
-          <div class="chapter">
-            <div class="ch-num">0</div>
-            <div>
-              <div class="ch-title">מה המטרה</div>
-              <div class="ch-sub">ליישר קו בין ההסדר למציאות לימודים מודרנית</div>
-            </div>
-          </div>
-<ul>
-            <li>⚖️ <b>שוויון הזדמנויות:</b> כל סטודנט/ית במסלול מוכר יקבל/תקבל יחס הוגן.</li>
-            <li>📏 <b>מדד נכון:</b> מסגרת לימודים מוכחת, לא שעות בכיתה.</li>
-            <li>🧩 <b>פשטות:</b> תנאי מינימום ברור + הוכחה רשמית.</li>
+      <div class="grid">
+        <div class="card2">
+          <div class="h">מה נבדק בפועל</div>
+          <div class="p">מינימום שעות פרונטליות (“מערכת שעות”) — במקום התקדמות לימודית.</div>
+          <ul>
+            <li>סף שעות כיתה/תרגול (18 שעות מינימום).</li>
+            <li>הטבה מותנית בנראות שעות, לא בעומס אמיתי.</li>
           </ul>
-        </section>
-
-        <!-- 1 -->
-        <section class="card" id="p1">
-          <div class="chapter">
-            <div class="ch-num">1</div>
-            <div>
-              <div class="ch-title">ההסדר הקודם — מה היה</div>
-              <div class="ch-sub">כולל תנאי מינימום שנמדד בפועל: 18 שעות</div>
-            </div>
-          </div>
-<ul>
-            <li>💰 <b>סיוע בלימודים:</b> עד 10,000 ₪ (לפי ההסדר).</li>
-            <li>📆 <b>תמיכה חודשית:</b> מחוץ לקיבוץ 1,500–2,000 ₪; בקיבוץ 1,000 ₪.</li>
-            <li>🧹 <b>תורנויות:</b> לפי התקנון (לדוגמה כ־12 בשנה).</li>
-            <li>⏳ <b>משך:</b> עד 5 שנים ועד גיל 30.</li>
-            <li>🕒 <b>איך נמדד בפועל:</b> מינימום <b>18 שעות</b> (מערכת שעות).</li>
+        </div>
+        <div class="card2">
+          <div class="h">מה הבעיה במדד הזה</div>
+          <div class="p">בעולם לימודים מודרני, שעות בכיתה הן רק חלק קטן מהעבודה.</div>
+          <ul>
+            <li>פתוחה/היברידי: פחות שעות פרונטליות.</li>
+            <li>יותר למידה עצמאית, מטלות, מבחנים.</li>
           </ul>
-        </section>
+        </div>
+      </div>
+    </section>
 
-        <!-- 2 -->
-        <section class="card" id="p2">
-          <div class="chapter">
-            <div class="ch-num">2</div>
-            <div>
-              <div class="ch-title">הבעיה והפערים</div>
-              <div class="ch-sub">שעות בכיתה ≠ עומס לימודים בעולם של היום</div>
-            </div>
+    <section class="section" id="gaps">
+      <div class="sec-head">
+        <div class="badge">⚠️</div>
+        <div>
+          <div class="sec-title">2) הבעיות בהסדר הנוכחי</div>
+          <div class="sec-sub">למה זה יוצר פערים למרות לימודים אמיתיים<br><span class="chip">בעיה: מדידה לפי שעות</span></div>
+        </div>
+      </div>
+
+      <div class="takeaway">
+        <div class="ic">🎯</div>
+        <div class="tx"><b>בשורה התחתונה:</b> המדידה לפי שעות יוצרת קיפוח למי שלומד במסלול גמיש — למרות שהוא עומד בעומס, מתקדם ומפתח את עצמו.</div>
+      </div>
+
+      <div class="grid">
+        <div class="card2">
+          <div class="h">למה פתוחה “נופלת בין הכיסאות”</div>
+          <div class="p">
+            באוניברסיטה הפתוחה אין תמיד מערכת שעות מלאה של כיתה/תרגול — אבל יש עומס אמיתי לאורך השבוע:
+            קריאה, מטלות, עבודות, מבחנים ולמידה עצמאית. לכן מדד של שעות פרונטליות מפספס את המציאות.
           </div>
-<div class="callout warn">
-            <b>הליבה:</b> ההסדר מתגמל “מערכת שעות” — ולכן מסלולים גמישים (כמו פתוחה/היברידי) יוצאים מקיפוח למרות לימודים אמיתיים.
+        </div>
+        <div class="card2">
+          <div class="h">למה זה לא רק עניין של “נוחות”</div>
+          <div class="p">
+            צעירים שונים לומדים אחרת: יש מי שמשלב עבודה ולימודים, ויש מי שמקדיש את כולו ללימודים.
+            ההסדר צריך להתאים לדור צעיר מגוון — בלי להעניש מסלול אחד ולעודד אחר רק בגלל נראות.
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      <div class="card2">
+        <div class="h">מה אנחנו רוצים שההסדר ישקף</div>
+        <ul>
+          <li><b>למידה = פיתוח עצמי</b> — וזה בדיוק מה שהקיבוץ תומך בו.</li>
+          <li>הוגנות בין מסלולים שונים (פתוחה, אוניברסיטה, היברידי, עבודה+לימודים).</li>
+          <li>מדד פשוט ובר-בדיקה שלא דורש מעקב אחרי “שעות”.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="proposal">
+      <div class="sec-head">
+        <div class="badge">✅</div>
+        <div>
+          <div class="sec-title">3) ההצעה להסדר חדש</div>
+          <div class="sec-sub">מדד חדש + שני פתרונות לבחירת הוועדה<br><span class="chip">הצעה: 3 קורסים + הוכחה</span></div>
+        </div>
+      </div>
+
+      <div class="takeaway">
+        <div class="ic">🎯</div>
+        <div class="tx"><b>בשורה התחתונה:</b> בודקים <b>לימודים מוכחים</b>, לא ציונים ולא שעות: <b>מינימום 3 קורסים בסמסטר</b> + <b>תעודת סטודנט/אישור רישום</b>.</div>
+      </div>
+
+      <div class="grid">
+        <div class="card2">
+          <div class="h">המדד החדש</div>
+          <ul>
+            <li><b>מינימום:</b> 3 קורסים בסמסטר (סף שמייצג לימודים אמיתיים).</li>
+            <li><b>בקרה:</b> תעודת סטודנט + אישור רישום/מערכת הרשמה.</li>
+            <li><b>לא בודקים:</b> ציונים.</li>
+          </ul>
+        </div>
+        <div class="card2">
+          <div class="h">מה קורה אם זה לא “קורסים”</div>
+          <div class="p">
+            אם מישהו לומד קורס/הכשרה משמעותית שאינה לפי סמסטר (למשל קורס של חצי שנה),
+            ניתן להכיר בכך לפי <b>היקף וזמן</b> + הוכחה רשמית — תחת אותו עיקרון: עומס אמיתי ומוכח.
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="grid">
+        <div class="card2">
+          <div class="h">פתרון א׳ — זכאות אוטומטית (פשוט ויעיל)</div>
+          <div class="p">
+            כל צעיר זכאי להסדר כל עוד הוא עומד בתנאי בסיס:
+            <b>3 קורסים בסמסטר + הוכחת לימודים</b>. אין תלות במערכת שעות.
           </div>
           <ul>
-            <li>🧱 <b>פער טכני:</b> לימודים גמישים פחות “נראים” כשעות בכיתה.</li>
-            <li>🎭 <b>תמריץ לא נכון:</b> בחירה במסלול לא מתאים רק כדי לעמוד ב־18 שעות.</li>
+            <li>קל לבדיקה, שקוף, ללא פרשנויות.</li>
+            <li>מכסה פתוחה/היברידי/עבודה+לימודים באותו סטנדרט.</li>
           </ul>
-        </section>
+        </div>
 
-        <!-- audience -->
-        <section class="card reveal" id="p2b">
-          <div class="chapter">
-            <div class="ch-num">👥</div>
-            <div>
-              <div class="ch-title">למי זה מתאים</div>
-              <div class="ch-sub">ההסדר החדש נותן מקום למסלולים שונים — באותו כלל</div>
-            </div>
+        <div class="card2">
+          <div class="h">פתרון ב׳ — מסלול לפי שנים (זכות שווה לכולם)</div>
+          <div class="p">
+            ההסדר מגיע לכל צעיר למשך <b>4–5 שנים</b> (חלון זמן הגיוני לתואר/הכשרה),
+            כאשר בכל סמסטר מציגים הוכחת לימודים משמעותיים (כמו תנאי המינימום).
           </div>
-          <div class="audience">
-            <div class="aud">
-              <div class="h">🏛️ אוניברסיטה/מכללה (פרונטלי)</div>
-              <div class="p">הכל נשאר פשוט: 3 קורסים + אישור הרשמה. אין צורך “לתרגם” מערכת שעות.</div>
-            </div>
-            <div class="aud">
-              <div class="h">💻 פתוחה / היברידי / אונליין</div>
-              <div class="p">עומס אמיתי גם בלי 18 שעות בכיתה. ההסדר מזהה לימודים לפי מסגרת מוכחת.</div>
-            </div>
-            <div class="aud">
-              <div class="h">🧑‍💼 עבודה + לימודים</div>
-              <div class="p">העולם גמיש. מי שמשלב עדיין יכול לעמוד בסף מינימום ולהתקדם בקצב שמתאים לו.</div>
-            </div>
-          </div>
-          <div class="callout">
-            <b>רעיון מרכזי:</b> ההסדר צריך להתאים את עצמו לכלל הדור הצעיר — לא להפך.
-          </div>
-        </section>
-
-        <!-- 3 -->
-        <section class="card" id="p3">
-          <div class="chapter">
-            <div class="ch-num">3</div>
-            <div>
-              <div class="ch-title">היה מול צריך</div>
-              <div class="ch-sub">שקף השוואה שמסכם את השינוי</div>
-            </div>
-          </div>
-<div class="compare">
-            <div class="panel">
-              <h3>🕰️ היה <span class="tag">היום</span></h3>
-              <ul>
-                <li>זכאות לפי <b>18 שעות</b> / נראות במערכת שעות.</li>
-                <li>מסלולים גמישים נפגעים.</li>
-              </ul>
-            </div>
-            <div class="panel">
-              <h3>🚀 צריך להיות <span class="tag">חדש</span></h3>
-              <ul>
-                <li>זכאות לפי <b>מסגרת לימודים מוכחת</b>.</li>
-                <li><b>סף מינימום:</b> 3 קורסים בסמסטר + הוכחה רשמית.</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <!-- 4 -->
-        <section class="card" id="p4">
-          <div class="chapter">
-            <div class="ch-num">4</div>
-            <div>
-              <div class="ch-title">עקרונות המדידה</div>
-              <div class="ch-sub">3 כללים פשוטים: מהות, סף מינימום, הוכחה</div>
-            </div>
-          </div>
-<ul>
-            <li>🧠 <b>מהות לפני נראות:</b> לא “כמה שעות בכיתה”.</li>
-            <li>📚 <b>סף מינימום:</b> <b>3 קורסים בסמסטר</b> (לא ציונים, לא שעות).</li>
-            <li>🧾 <b>בקרה בסיסית:</b> תעודת סטודנט/אישור הרשמה.</li>
+          <ul>
+            <li>מייצר יציבות ותכנון לצעירים.</li>
+            <li>עדיין שומר רף מינימום אמיתי.</li>
           </ul>
-        </section>
-
-        <!-- 5 -->
-        <section class="card" id="p5">
-          <div class="chapter">
-            <div class="ch-num">5</div>
-            <div>
-              <div class="ch-title">שני פתרונות למסלול אקדמי</div>
-              <div class="ch-sub">אותו סף מינימום — שני מודלים לניהול הזכאות</div>
-            </div>
-          </div>
-<div class="two">
-            <div class="solution">
-              <h3>פתרון 1: זכאות אוטומטית לפי שנים</h3>
-              <ul>
-                <li>🗓️ <b>4–5 שנים</b> זכאות לכל צעיר/ה.</li>
-                <li>✅ <b>תנאי:</b> 3 קורסים בסמסטר + הוכחה.</li>
-              </ul>
-              <div class="mini"><b>יתרון:</b> הכי פשוט, הכי שוויוני.</div>
-            </div>
-
-            <div class="solution">
-              <h3>פתרון 2: זכאות מתחדשת לפי שנה</h3>
-              <ul>
-                <li>🔁 חידוש זכאות <b>שנתי</b> לפי הוכחה בסיסית.</li>
-                <li>✅ <b>תנאי:</b> 3 קורסים בסמסטר + הוכחה.</li>
-              </ul>
-              <div class="mini"><b>יתרון:</b> גמישות + תחושת בקרה.</div>
-            </div>
-          </div>
-        </section>
-
-        <!-- 6 -->
-        <section class="card" id="p6">
-          <div class="chapter">
-            <div class="ch-num">6</div>
-            <div>
-              <div class="ch-title">FAQ</div>
-              <div class="ch-sub">התנגדויות נפוצות — תשובות קצרות</div>
-            </div>
-          </div>
-<div class="faq">
-            <details>
-              <summary>איך נדע שמישהו באמת לומד?</summary>
-              <p>מינימום 3 קורסים + אישור רשמי (תעודת סטודנט/אישור הרשמה). זה מדד פשוט ואמין.</p>
-            </details>
-            <details>
-              <summary>למה לא לפי ציונים?</summary>
-              <p>המטרה היא תמיכה בלמידה ובפיתוח עצמי. הזכאות נבחנת לפי מסגרת, לא לפי הישגים.</p>
-            </details>
-            <details>
-              <summary>זה יפתח דלת לניצול?</summary>
-              <p>הסף (3 קורסים + הוכחה) מצמצם משמעותית. מי שלא עומד בו — לא נכנס.</p>
-            </details>
-          </div>
-        </section>
-
-        <!-- 7 -->
-        <section class="card" id="p7">
-          <div class="chapter">
-            <div class="ch-num">7</div>
-            <div>
-              <div class="ch-title">סיכום</div>
-              <div class="ch-sub">המסר בשורה אחת לדיון בוועדה</div>
-            </div>
-          </div>
-<div class="callout">
-            <b>היה:</b> 18 שעות בכיתה. <b>השינוי:</b> 3 קורסים + הוכחה. <b>התוצאה:</b> שוויון לכל מסלול לימודים מוכר + 2 מודלים לבחירה.
-          </div>
-        </section>
-
-        <!-- 8 -->
-        <section class="card" id="p8">
-          <div class="chapter">
-            <div class="ch-num">✨</div>
-            <div>
-              <div class="ch-title">שקף סיום</div>
-              <div class="ch-sub">מה מקבלים אחרי השינוי (בפשטות)</div>
-            </div>
-          </div>
-<ul>
-            <li>🎯 <b>שוויון הזדמנויות:</b> אותו כלל לכל סטודנט/ית במסלול מוכר.</li>
-            <li>🧭 <b>מדד נכון:</b> 3 קורסים בסמסטר + הוכחת לימודים (בלי ציונים).</li>
-            <li>🧩 <b>יישום פשוט:</b> קריטריון אחד ברור — קל לבדיקה וקל להסברה.</li>
-            <li>✅ <b>בחירה בין שני מודלים:</b> אוטומטי לשנים או חידוש שנתי.</li>
-          </ul>
-          <div class="callout">
-            <b>סיכום בשורה:</b> עוברים ממדידת “שעות בכיתה” למדידת “מסגרת לימודים מוכחת” — ומחזירים את ההסדר למטרה המקורית: פיתוח עצמי וקידום צעירים.
-          </div>
-        </section>
-
+        </div>
       </div>
+    </section>
+
+    <section class="section" id="summary">
+      <div class="sec-head">
+        <div class="badge">🎯</div>
+        <div>
+          <div class="sec-title">4) סיכום לדיון</div>
+          <div class="sec-sub">מה הוועדה מקבלת בפועל ומה נסגר<br><span class="chip">תוצאה: הוגנות ושקיפות</span></div>
+        </div>
+      </div>
+
+      <div class="takeaway">
+        <div class="ic">🎯</div>
+        <div class="tx"><b>בשורה התחתונה:</b> פתרון הוגן, ברור, נגיש ובדיד-יישום שמקדם צעירים לפי פיתוח עצמי — לא לפי מסגרת קשיחה של שעות.</div>
+      </div>
+
+      <div class="grid">
+        <div class="card2">
+          <div class="h">מה אנחנו נותנים</div>
+          <ul>
+            <li>מדד חד וברור: 3 קורסים + הוכחה.</li>
+            <li>שתי חלופות ליישום — הוועדה בוחרת.</li>
+            <li>שקיפות, פשטות, הוגנות בין מסלולים.</li>
+          </ul>
+        </div>
+        <div class="card2">
+          <div class="h">מה הפער שנפתר</div>
+          <ul>
+            <li>פתוחה/היברידי לא נפגעים בגלל “נראות”.</li>
+            <li>הסדר שמתאים לדור צעיר מגוון.</li>
+            <li>בקרה קלה בלי חיכוכים ובלי בדיקת ציונים.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="nav-bar" id="navBar" aria-label="ניווט פרקים">
+    <div class="nav-meta" id="navMeta">ניווט פרקים</div>
+    <div class="nav-actions">
+      <a class="btn" id="prevLink" href="#cover" aria-label="פרק קודם">⬅️ הקודם</a>
+      <a class="btn primary" id="nextLink" href="#old" aria-label="פרק הבא">הבא ➡️</a>
     </div>
   </div>
-
-  <div class="mobile-nav" aria-label="ניווט תחתון (נייד)">
-    <a href="#top">⬆️</a>
-    <a href="#p1">📌</a>
-    <a href="#p5">✅</a>
-    <a href="#p6">❓</a>
-  </div>
-
-  <div class="toast" id="toast">הועתק!</div>
+  <button class="btn topbtn" id="toTop" type="button" aria-label="חזרה למעלה">⬆️ למעלה</button>
 
   <script>
-    // Theme toggle (persist)
-    const toggleTheme = document.getElementById('toggleTheme');
-    const root = document.documentElement;
-    const saved = localStorage.getItem('theme');
-    if(saved){
-      if(saved === 'dark') root.setAttribute('data-theme','dark');
-      toggleTheme.textContent = (saved === 'dark') ? '☀️ מצב בהיר' : '🌓 מצב כהה';
-    }
-    toggleTheme.addEventListener('click', ()=>{
-      const isDark = root.getAttribute('data-theme') === 'dark';
-      if(isDark){
-        root.removeAttribute('data-theme');
-        localStorage.setItem('theme','light');
-        toggleTheme.textContent = '🌓 מצב כהה';
-      }else{
-        root.setAttribute('data-theme','dark');
-        localStorage.setItem('theme','dark');
-        toggleTheme.textContent = '☀️ מצב בהיר';
-      }
+    // Print
+    document.getElementById('printBtn')?.addEventListener('click', ()=>window.print());
+
+    // Dark toggle (manual)
+    const darkBtn = document.getElementById('darkBtn');
+    let manualDark = false;
+    const applyMode = ()=>{
+      if(!manualDark) return;
+      document.documentElement.style.setProperty('--bg','#0b1220');
+      document.documentElement.style.setProperty('--card','#0f1a2d');
+      document.documentElement.style.setProperty('--text','#e9f0ff');
+      document.documentElement.style.setProperty('--muted','rgba(233,240,255,.72)');
+      document.documentElement.style.setProperty('--line','rgba(233,240,255,.12)');
+    };
+    darkBtn?.addEventListener('click', ()=>{
+      manualDark = !manualDark;
+      darkBtn.textContent = manualDark ? '☀️ מצב בהיר' : '🌙 מצב כהה';
+      if(manualDark) applyMode(); else location.reload();
     });
 
-    
-    // Presentation clean mode
-    const presentBtn = document.getElementById('togglePresent');
-    const presentSaved = localStorage.getItem('present') === '1';
-    if(presentSaved) document.body.classList.add('present');
-    presentBtn.textContent = document.body.classList.contains('present') ? '↩️ יציאה ממצב הצגה' : '🧼 מצב הצגה נקי';
-
-    presentBtn.addEventListener('click', ()=>{
-      document.body.classList.toggle('present');
-      const on = document.body.classList.contains('present');
-      localStorage.setItem('present', on ? '1' : '0');
-      presentBtn.textContent = on ? '↩️ יציאה ממצב הצגה' : '🧼 מצב הצגה נקי';
-    });
-
-    // Scroll progress bar
-    const bar = document.getElementById('pbar');
-    function updateProgress(){
+    // Progress bar
+    const bar = document.getElementById('bar');
+    const updBar = ()=>{
       const h = document.documentElement;
       const scrollTop = h.scrollTop || document.body.scrollTop;
       const scrollHeight = h.scrollHeight - h.clientHeight;
       const p = scrollHeight ? (scrollTop / scrollHeight) * 100 : 0;
-      bar.style.width = p.toFixed(1) + '%';
-    }
-    document.addEventListener('scroll', updateProgress, {passive:true});
-    updateProgress();
-
-    // Copy link (top button)
-    const toast = document.getElementById('toast');
-    function showToast(msg){
-      toast.textContent = msg;
-      toast.classList.add('show');
-      clearTimeout(window.__t);
-      window.__t = setTimeout(()=>toast.classList.remove('show'), 1400);
-    }
-    document.getElementById('copyLink').addEventListener('click', async ()=>{
-      try{
-        await navigator.clipboard.writeText(location.href);
-        showToast('הקישור הועתק ✔');
-      }catch(e){
-        showToast('לא הצלחתי להעתיק (הרשאות דפדפן)');
-      }
-    });
+      bar.style.width = Math.max(0, Math.min(100, p)) + '%';
+    };
+    window.addEventListener('scroll', ()=>requestAnimationFrame(updBar), {passive:true});
+    updBar();
 
     
-    // In-page search highlight (simple)
-    const q = document.getElementById('q');
-    const hits = document.getElementById('hits');
-    const markClass = 'mark-hit';
-    const style = document.createElement('style');
-    style.textContent = `.mark-hit{background: color-mix(in srgb, var(--warn) 35%, transparent); border-radius:6px; padding:0 .15em}`;
-    document.head.appendChild(style);
+    
+    // Chapter navigation (hash-first: works even if smooth scroll is blocked)
+    const order = ['cover','old','gaps','proposal','summary'];
+    const titles = {cover:'פתיחה', old:'ההסדר הקודם', gaps:'הבעיות', proposal:'ההצעה', summary:'סיכום לדיון'};
+    const prevLink = document.getElementById('prevLink');
+    const nextLink = document.getElementById('nextLink');
+    const navMeta = document.getElementById('navMeta');
 
-    function clearMarks(){
-      document.querySelectorAll('span.'+markClass).forEach(s=>{
-        const t = document.createTextNode(s.textContent);
-        s.replaceWith(t);
+    const current = ()=>{
+      // Use viewport position; fall back to hash
+      const tops = order.map(id=>{
+        const el=document.getElementById(id); 
+        const r=el?.getBoundingClientRect?.() || {top: 999999};
+        return {id, top:r.top};
       });
-    }
-    function markText(node, term){
-      const text = node.nodeValue;
-      const idx = text.toLowerCase().indexOf(term);
-      if(idx === -1) return 0;
-      const before = document.createTextNode(text.slice(0, idx));
-      const match = document.createElement('span');
-      match.className = markClass;
-      match.textContent = text.slice(idx, idx + term.length);
-      const after = document.createTextNode(text.slice(idx + term.length));
-      const parent = node.parentNode;
-      parent.insertBefore(before, node);
-      parent.insertBefore(match, node);
-      parent.insertBefore(after, node);
-      parent.removeChild(node);
-      return 1;
-    }
-    function walkAndMark(term){
-      let count = 0;
-      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
-        acceptNode: (n)=>{
-          if(!n.nodeValue || !n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
-          if(['SCRIPT','STYLE'].includes(n.parentNode?.nodeName)) return NodeFilter.FILTER_REJECT;
-          return NodeFilter.FILTER_ACCEPT;
-        }
-      });
-      let n;
-      while((n = walker.nextNode())){
-        if(n.parentNode?.classList?.contains(markClass)) continue;
-        count += markText(n, term);
+      const near = (tops.filter(x=>x.top<=140).sort((a,b)=>b.top-a.top)[0] || tops.sort((a,b)=>a.top-b.top)[0]);
+      return (location.hash && order.includes(location.hash.slice(1))) ? location.hash.slice(1) : (near?.id || 'cover');
+    };
+
+    const updateNav = ()=>{
+      const cur = current();
+      const i = order.indexOf(cur);
+      const prevId = order[Math.max(0, i-1)];
+      const nextId = order[Math.min(order.length-1, i+1)];
+
+      if(prevLink) prevLink.href = '#' + prevId;
+      if(nextLink) nextLink.href = '#' + nextId;
+
+      if(prevLink) prevLink.setAttribute('aria-disabled', String(i<=0));
+      if(nextLink) nextLink.setAttribute('aria-disabled', String(i>=order.length-1));
+
+      // Visual disabled state via CSS class
+      prevLink?.classList.toggle('disabled', i<=0);
+      nextLink?.classList.toggle('disabled', i>=order.length-1);
+
+      if(navMeta){
+        const chapter = Math.max(1, Math.min(4, i+1)); // cover=1, summary=5 but show 4 at most
+        navMeta.textContent = `פרק ${Math.min(chapter,4)} מתוך 4 • ${titles[cur] || ''}`;
       }
-      return count;
-    }
-    q.addEventListener('input', ()=>{
-      const term = q.value.trim().toLowerCase();
-      clearMarks();
-      if(!term){ hits.textContent=''; return; }
-      const count = walkAndMark(term);
-      hits.textContent = count ? `${count} תוצאות` : 'אין תוצאות';
+    };
+
+    window.addEventListener('scroll', ()=>requestAnimationFrame(updateNav), {passive:true});
+    window.addEventListener('hashchange', updateNav);
+    updateNav();
+
+
+
+    // Back to top (to cover)
+    const toTop = document.getElementById('toTop');
+    const toggleTop = ()=>{
+      toTop.style.display = window.scrollY > 650 ? 'inline-flex' : 'none';
+    };
+    window.addEventListener('scroll', ()=>requestAnimationFrame(toggleTop), {passive:true});
+    toggleTop();
+    toTop.addEventListener('click', ()=>goTo('cover'));
+
+    // Keyboard (desktop)
+    document.addEventListener('keydown', (e)=>{
+      const tag = (document.activeElement?.tagName || '').toLowerCase();
+      if(tag === 'input' || tag === 'textarea') return;
+      if(e.key === 'ArrowLeft'){ prevBtn.click(); }
+      if(e.key === 'ArrowRight'){ nextBtn.click(); }
+      if(e.key.toLowerCase() === 'h'){ goTo('cover'); }
+      if(e.key.toLowerCase() === 'e'){ goTo('summary'); }
     });
+  
+    // Toast helper
+    const toastEl = document.getElementById('toast');
+    let toastT = null;
+    const toast = (msg)=>{
+      if(!toastEl) return;
+      toastEl.textContent = msg;
+      toastEl.classList.add('show');
+      clearTimeout(toastT);
+      toastT = setTimeout(()=>toastEl.classList.remove('show'), 1600);
+    };
+
+    // Copy link
+    document.getElementById('copyBtn')?.addEventListener('click', async ()=>{
+      const url = location.href;
+      try{
+        await navigator.clipboard.writeText(url);
+        toast('הקישור הועתק ✅');
+      }catch(e){
+        // Fallback
+        const ta = document.createElement('textarea');
+        ta.value = url; document.body.appendChild(ta);
+        ta.select(); document.execCommand('copy');
+        ta.remove();
+        toast('הקישור הועתק ✅');
+      }
+    });
+
+    // WhatsApp share
+    document.getElementById('waBtn')?.addEventListener('click', ()=>{
+      const url = location.href;
+      const text = `מצרף/ת מסמך לדיון בוועדה: "הסדר סטודנט חדש".\n\n${url}`;
+      window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+    });
+
+    // Presentation mode
+    const presentBtn = document.getElementById('presentBtn');
+    presentBtn?.addEventListener('click', ()=>{
+      document.body.classList.toggle('present');
+      const on = document.body.classList.contains('present');
+      presentBtn.textContent = on ? '↩️ חזרה' : '🧼 מצב הצגה';
+      toast(on ? 'מצב הצגה הופעל' : 'חזרה למצב רגיל');
+    });
+
   </script>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
